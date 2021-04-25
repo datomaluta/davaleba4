@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index']);
+Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
+
+Route::get('/posts/list', [\App\Http\Controllers\PostController::class, 'postList'])->name('posts.list');
 
 Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'create']);
 
@@ -31,7 +33,11 @@ Route::put('posts/{id}/destroy', [\App\Http\Controllers\PostController::class, '
 
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $posts = Post::all();
+
+
+    return view('test.test', compact('posts'));
 });
 
 Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
