@@ -53,24 +53,52 @@
         <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
             <div class="grid grid-cols-1 md:grid-cols-2">
 
+{{--                @if($errors->any())--}}
+{{--                    <div>--}}
+{{--                        <ul>--}}
+{{--                            @foreach($errors->all() as $error)--}}
+{{--                            <li>--}}
+{{--                                {{$error}}--}}
+{{--                            </li>--}}
+{{--                            @endforeach--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+{{--                @endif--}}
+
                 <div style="margin: 20px">
                     <form action="{{route('posts.store')}}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="title">Post Title</label>
-                            <input type="text" name="title" class="form-control" id="postTitle" aria-describedby="emailHelp" placeholder="Enter Post Title">
+                            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"  id="postTitle" aria-describedby="emailHelp" placeholder="Enter Post Title">
                             <small id="emailHelp" class="form-text text-muted">Post title</small>
+                            @error('title')
+                            <p class="text-danger">{{$errors->first('title')}}</p>
+                            @enderror
+
                         </div>
                         <div class="form-group">
                             <label for="title">Post Text</label>
                             <input type="text" name="post_text" class="form-control" id="postText" aria-describedby="emailHelp" placeholder="Enter Post Text">
                             <small id="emailHelp" class="form-text text-muted">Post text</small>
+                            @error('text')
+                            <p class="text-danger">{{$errors->first('text')}}</p>
+                            @enderror
                         </div>
+
 
                         <div class="form-group">
                             <label for="title">Post Author</label>
                             <input type="text" name="author_name" class="form-control" id="postAuthor" aria-describedby="emailHelp" placeholder="Enter Post Author">
                             <small id="emailHelp" class="form-text text-muted">Post author</small>
+                        </div>
+
+                        <div class="form-group">
+                            <select name="tags[]" id="" multiple>
+                                @foreach($tags as $tag)
+                                    <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>

@@ -28,7 +28,7 @@ Route::get('posts/{id}/edit', [\App\Http\Controllers\PostController::class, 'edi
 
 Route::put('posts/{id}/update', [\App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
 
-Route::put('posts/{id}/destroy', [\App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
+Route::get('posts/{id}/destroy', [\App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
 
 
 
@@ -44,4 +44,16 @@ Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
 
 Route::get('/calculate', [\App\Http\Controllers\TestController::class, 'calculate']);
 
+Route::get('/users/login/index', [\App\Http\Controllers\LoginController::class, 'index'])->name('users.login.index');
+
+Route::post('/users/login', [\App\Http\Controllers\LoginController::class, 'login'])->name('users.login');
+
+Route::get('/user', function () {
+    $user = \App\Models\User::find(1);
+
+    dd($user-> birthPlace->town);
+//    dd($birthPlace->user->email);
+});
+
+Route::get('/get-data',[\App\Http\Controllers\DataController::class, 'getData']);
 

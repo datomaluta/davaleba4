@@ -74,6 +74,14 @@
                             <small id="emailHelp" class="form-text text-muted">Post author</small>
                         </div>
 
+                        <div class="form-group">
+                            <select name="tags[]" id="" multiple>
+                                @foreach($tags as $tag)
+                                    <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
 
